@@ -4,13 +4,12 @@ import ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Read
 import ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Reader.ReaderImplementation;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class wordCounter {
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\Acer\\Desktop\\java_practice\\inheritage\\ua\\goit\\polymorpism\\Module10\\Streams\\Homework10Task3\\file.txt");
+        File file = new File("C:\\Users\\Acer\\Desktop\\java_practice\\inheritage\\ua\\goit\\polymorpism\\Module10\\Streams\\HomeworkGeneral\\Homework10Task3\\file.txt");
         ArrayList<String> text = new ArrayList<>();
         Reader reader = new ReaderImplementation(file);
         text = reader.getText();
@@ -26,9 +25,12 @@ public class wordCounter {
                 wordCounterMap.put(word, wordCounterMap.getOrDefault(word, 0)+1);
             }
         }
-        for(Map.Entry<String, Integer>entry:wordCounterMap.entrySet()){
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+         wordCounterMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                 .forEach(System.out::println);
+
+
+
     }
 
 }

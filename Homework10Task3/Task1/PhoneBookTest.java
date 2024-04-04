@@ -3,8 +3,8 @@ package ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Tas
 import java.io.*;
 
 public class PhoneBookTest {
-    private  static  String FILE_PATH = "C:\\Users\\Acer\\Desktop\\java_practice\\inheritage\\ua\\goit\\polymorpism\\Module10\\Streams\\Homework10\\Task1\\PhoneBook.txt";
-    public static void main(String[] args) throws IOException {
+    private static String FILE_PATH;
+    public static void main(String[] args)  {
 
         File file = new File(FILE_PATH);
 

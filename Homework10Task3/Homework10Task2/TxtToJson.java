@@ -1,16 +1,17 @@
 package ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Homework10Task2;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class TxtToJson {
+private static String FILE_PATH;
+private  static String FILE_PATH_TO_JSON;
     public static void main(String[] args)  {
         ArrayList<User>data = new ArrayList<>();
 
-        File file = new File("C:\\Users\\Acer\\Desktop\\java_practice\\inheritage\\ua\\goit\\polymorpism\\Module10\\Streams\\Homework10Task2\\file.txt");
+        File file = new File(FILE_PATH);
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
            String line;
            line = bufferedReader.readLine();
@@ -29,17 +30,26 @@ public class TxtToJson {
             System.err.println(e.getMessage());
         }
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(data);
+        String json = "[";
+        for (int i = 0; i < data.size(); i++) {
+            User user = data.get(i);
+            json += "{\"name\":\"" + user.getName() + "\",\"age\":" + user.getAge() + "}";
+            if (i < data.size() - 1) {
+                json += ",";
+            }
+        }
+        json += "]";
 
-        try(FileWriter fileWriter =new FileWriter("C:\\Users\\Acer\\Desktop\\java_practice\\inheritage\\ua\\goit\\polymorpism\\Module10\\Streams\\Homework10Task2\\user.json")){
-            fileWriter.write(json);
 
-        }catch (IOException e){
+        File jsonFile = new File(FILE_PATH_TO_JSON);
+        try (FileWriter fileWriter = new FileWriter(jsonFile);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            bufferedWriter.write(json);
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
-
-
-
 }
+
+
+
