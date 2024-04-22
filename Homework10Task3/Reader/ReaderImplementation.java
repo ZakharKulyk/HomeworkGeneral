@@ -20,7 +20,6 @@ public class ReaderImplementation implements  Reader{
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
            String line;
             while ((line = bufferedReader.readLine())!=null){
-
                 data.add(line);
             }
 

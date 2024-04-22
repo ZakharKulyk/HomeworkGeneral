@@ -6,18 +6,14 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class TxtToJson {
-private static String FILE_PATH;
-private  static String FILE_PATH_TO_JSON;
     public static void main(String[] args)  {
         ArrayList<User>data = new ArrayList<>();
 
-        File file = new File(FILE_PATH);
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("file.txt"))) {
            String line;
            line = bufferedReader.readLine();
            while ((line = bufferedReader.readLine())!= null) {
                String parts[] = line.split(" ");
-
                 if(parts.length ==2){
                     String name = parts[0];
                     int age = Integer.parseInt(parts[1]);
@@ -30,21 +26,26 @@ private  static String FILE_PATH_TO_JSON;
             System.err.println(e.getMessage());
         }
 
-        String json = "[";
+        StringBuilder json = new StringBuilder("[\n");
         for (int i = 0; i < data.size(); i++) {
             User user = data.get(i);
-            json += "{\"name\":\"" + user.getName() + "\",\"age\":" + user.getAge() + "}";
+            json.append("    {\n")
+                    .append("        \"name\": \"").append(user.getName()).append("\",\n")
+                    .append("        \"age\": ").append(user.getAge()).append("\n")
+                    .append("    }");
             if (i < data.size() - 1) {
-                json += ",";
+                json.append(",\n");
+            } else {
+                json.append("\n");
             }
         }
-        json += "]";
+        json.append("]");
 
 
-        File jsonFile = new File(FILE_PATH_TO_JSON);
-        try (FileWriter fileWriter = new FileWriter(jsonFile);
+
+        try (FileWriter fileWriter = new FileWriter("user.json");
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            bufferedWriter.write(json);
+            bufferedWriter.write(json.toString());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

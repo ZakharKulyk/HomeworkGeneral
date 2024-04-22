@@ -3,13 +3,12 @@ package ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Tas
 import java.io.*;
 
 public class PhoneBookTest {
-    private static String FILE_PATH;
     public static void main(String[] args)  {
 
-        File file = new File(FILE_PATH);
+
 
         System.out.println("Here is our phonebook :");
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("file.txt"))) {
 
             String text = bufferedReader.readLine();
             while (text!=null) {
