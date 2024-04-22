@@ -3,6 +3,7 @@ package ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Hom
 public class User {
     String name;
     int age;
+
     public User(String name, int age) {
         this.name = name;
         this.age = age;

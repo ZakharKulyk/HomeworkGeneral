@@ -1,28 +1,27 @@
 package ua.goit.polymorpism.Module10.Streams.HomeworkGeneral.Homework10Task3.Homework10Task2;
 
 
-
 import java.io.*;
 import java.util.ArrayList;
 
 public class TxtToJson {
-    public static void main(String[] args)  {
-        ArrayList<User>data = new ArrayList<>();
+    public static void main(String[] args) {
+        ArrayList<User> data = new ArrayList<>();
 
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader("file.txt"))) {
-           String line;
-           line = bufferedReader.readLine();
-           while ((line = bufferedReader.readLine())!= null) {
-               String parts[] = line.split(" ");
-                if(parts.length ==2){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("file.txt"))) {
+            String line;
+            line = bufferedReader.readLine();
+            while ((line = bufferedReader.readLine()) != null) {
+                String parts[] = line.split(" ");
+                if (parts.length == 2) {
                     String name = parts[0];
                     int age = Integer.parseInt(parts[1]);
                     data.add(new User(name, age));
                 }
 
-           }
+            }
 
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
 
@@ -40,7 +39,6 @@ public class TxtToJson {
             }
         }
         json.append("]");
-
 
 
         try (FileWriter fileWriter = new FileWriter("user.json");
